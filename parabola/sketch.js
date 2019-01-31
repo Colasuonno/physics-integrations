@@ -1,37 +1,66 @@
 
+
 var palla;
+var pathX = [];
+var pathY =[];
+var angle;
+var process = false;
+
 
 function setup(){
-    createCanvas(2000, 2000);
+    createCanvas(3000, 1000);
     palla = new Palla();
 }
 
 
 function draw(){
     background('#9fd2cd');
+
+
+    strokeWeight(4);
+    stroke(255, 0, 0);
+
+    for (var i = 0; i < pathX.length; i++){
+        var x = pathX[i];
+        var y = pathY[i];
+        point(x, y);
+    }
+
+
     palla.show();
-    palla.update(40, 5);
+    if (this.process && palla.y < height){
+
+        palla.update();
+    
+}
 }
 
 
 class Palla {
 
     constructor(){
-        this.x = 50;
-        this.y = (height/2)-200;
+        this.x = parseInt($('#input_initx').val());
+        this.y = parseInt($('#input_inity').val());
+        this.angle = parseInt($('#input_angle').val());
 
-        this.v0 = 5;
-        this.a = 10;
+        this.virginX = this.x;
+        this.virginY = this.y;
+
+        this.v0 = parseInt($('#input_v0').val());
+        this.a = parseInt($('#input_a').val());
         this.t = 0;
 
     }
 
     show(){
         fill('#fd6c9e');
-        ellipse(this.x, this.y, 100, 100);
+        noStroke();
+        ellipse(this.x, this.y, 50, 50);
+        pathX.push(this.x);
+        pathY.push(this.y);
     }
 
-    update(alpha){
+    update(){
         /**
          * v0x = v0*cos(alpha);
          * v0y = v0*sin(alpha);
@@ -44,23 +73,36 @@ class Palla {
          */
         
 
-        this.v0x = this.v0*cos(alpha);
-        this.v0y = this.v0*sin(alpha);
 
-        this.x -= this.v0x*this.t;
-        this.y -= -1/2 * this.a * this.t * this.t + this.v0y;
+        this.v0x = this.v0*cos(this.angle);
+        this.v0y = this.v0*sin(this.angle);
 
-        this.t += 0.003;
+        this.x = this.virginX + (this.v0x*this.t);
+        this.y = 1/2 * this.a * this.t * this.t - (this.v0y*this.t) + this.virginY;
 
-        console.log("V0X " + this.v0x);
-        console.log("v0y " + this.v0y);
-        console.log("v0 " + this.v0);
-        console.log("t " + this.t);
-        console.log("x " + this.x);
-        console.log("y " + this.y);
-
-    
+        this.t += 0.2;
 
     }
 
+}
+
+
+function reset(){
+    this.angle = parseInt($('#input_angle').val());
+    this.process = false;
+    this.palla = new Palla();
+    this.pathX = [];
+    this.pathY = [];
+
+    console.log("Reset:")
+    console.log("angle="+this.angle);
+    console.log("x0="+this.palla.virginX);
+    console.log("y0="+this.palla.virginY);
+    console.log("v0="+this.palla.v0);
+    console.log("a="+this.palla.a)
+
+}
+
+function invert(){
+    this.process = !this.process;
 }

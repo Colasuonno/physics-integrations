@@ -4,10 +4,62 @@
     <meta charset="utf-8" />
     <title>Moto </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
     <script src="sketch.js"></script>
+
+    <style>
+            .button {
+              background-color: #4CAF50;
+              border: none;
+              color: white;
+              padding: 15px 32px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+            }
+
+            .input {
+            background-color: #DDDDDD;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                 text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;        
+            }
+
+            .sampletext{
+                font-size: 35px;
+            }
+
+            </style>
+
 </head>
 <body>
-    
+
+    <ul  style="list-style: none"   >
+
+        <li> <h1>Inputs</h1></1></li>
+        <li> <input id="input_angle" value="20" class="input" placeholder="Inserisci l'angolo"> <b class="sampletext">Angolo</b> </li>
+        <li> <input id="input_inity" value="990" class="input" placeholder="Inserisci l'y iniziale"> <b class="sampletext">Y iniziale (min=1000, max=0)</b> </li>
+        <li> <input id="input_initx" value="30" class="input" placeholder="Inserisci l'x iniziale"> <b class="sampletext">X iniziale </b> </li>
+        <li> <input id="input_v0" value="70" class="input" placeholder="Inserisci la velocita' iniziale"> <b class="sampletext">Velocita' iniziale </b> </li>
+        <li> <input id="input_a" value="9.81" class="input" placeholder="Inserisci l'accelerazione"> <b class="sampletext">Accelerazione </b> </li>
+        <li> <h1>Buttons</h1> </li>
+        <li>  <button class="button" id="init_button" onclick="invert();">Start/Stop</button>  <button class="button" onclick="reset();" id="reset_button">Reset</button> </li>
+
+    </ul>
+
+
+   <!-- <input type="text" name="Angle" id="input_angle">
+    <button id="button_angle" onclick="onAngleUpdate();">Update Angle</button>
+    <a>Start button</a>
+    <button id="init_button" onclick="invert();">Start/Stop</button>-->
 </body>
 </html>
